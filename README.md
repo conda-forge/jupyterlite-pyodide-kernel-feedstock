@@ -34,14 +34,14 @@ Current release info
 Installing jupyterlite-pyodide-kernel
 =====================================
 
-Installing `jupyterlite-pyodide-kernel` from the `conda-forge/label/jupyterlite_pyodide_kernel_alpha` channel can be achieved by adding `conda-forge/label/jupyterlite_pyodide_kernel_alpha` to your channels with:
+Installing `jupyterlite-pyodide-kernel` from the `conda-forge/label/jupyterlite_pyodide_kernel_beta` channel can be achieved by adding `conda-forge/label/jupyterlite_pyodide_kernel_beta` to your channels with:
 
 ```
-conda config --add channels conda-forge/label/jupyterlite_pyodide_kernel_alpha
+conda config --add channels conda-forge/label/jupyterlite_pyodide_kernel_beta
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge/label/jupyterlite_pyodide_kernel_alpha` channel has been enabled, `jupyterlite-pyodide-kernel` can be installed with `conda`:
+Once the `conda-forge/label/jupyterlite_pyodide_kernel_beta` channel has been enabled, `jupyterlite-pyodide-kernel` can be installed with `conda`:
 
 ```
 conda install jupyterlite-pyodide-kernel
@@ -56,26 +56,26 @@ mamba install jupyterlite-pyodide-kernel
 It is possible to list all of the versions of `jupyterlite-pyodide-kernel` available on your platform with `conda`:
 
 ```
-conda search jupyterlite-pyodide-kernel --channel conda-forge/label/jupyterlite_pyodide_kernel_alpha
+conda search jupyterlite-pyodide-kernel --channel conda-forge/label/jupyterlite_pyodide_kernel_beta
 ```
 
 or with `mamba`:
 
 ```
-mamba search jupyterlite-pyodide-kernel --channel conda-forge/label/jupyterlite_pyodide_kernel_alpha
+mamba search jupyterlite-pyodide-kernel --channel conda-forge/label/jupyterlite_pyodide_kernel_beta
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search jupyterlite-pyodide-kernel --channel conda-forge/label/jupyterlite_pyodide_kernel_alpha
+mamba repoquery search jupyterlite-pyodide-kernel --channel conda-forge/label/jupyterlite_pyodide_kernel_beta
 
 # List packages depending on `jupyterlite-pyodide-kernel`:
-mamba repoquery whoneeds jupyterlite-pyodide-kernel --channel conda-forge/label/jupyterlite_pyodide_kernel_alpha
+mamba repoquery whoneeds jupyterlite-pyodide-kernel --channel conda-forge/label/jupyterlite_pyodide_kernel_beta
 
 # List dependencies of `jupyterlite-pyodide-kernel`:
-mamba repoquery depends jupyterlite-pyodide-kernel --channel conda-forge/label/jupyterlite_pyodide_kernel_alpha
+mamba repoquery depends jupyterlite-pyodide-kernel --channel conda-forge/label/jupyterlite_pyodide_kernel_beta
 ```
 
 
