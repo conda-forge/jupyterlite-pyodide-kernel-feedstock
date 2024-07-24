@@ -1,8 +1,8 @@
 cdt_name:
-- cos6
+- cos7
 channel_sources:
-- conda-forge/label/jupyterlite_core_beta,conda-forge
+- conda-forge/label/jupyterlite_core_rc,conda-forge
 channel_targets:
-- conda-forge jupyterlite_pyodide_kernel_beta
+- conda-forge jupyterlite_pyodide_kernel_rc
 docker_image:
 - quay.io/condaforge/linux-anvil-cos7-x86_64
