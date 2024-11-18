@@ -1,3 +1,4 @@
+{% set jupyterlab_version = ">=4.2.5,<4.3.0" %}
 {% set version = "0.4.4" %}
 
 {% set python_min = python_min | default("3.9") %}
