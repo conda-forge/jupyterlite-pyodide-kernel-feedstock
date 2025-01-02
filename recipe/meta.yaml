@@ -1,19 +1,25 @@
-{% set version = "0.4.0b0" %}
+{% set version = "0.5.0b0" %}
+
+{% set python_min = python_min | default("3.9") %}
+
 {% set js_version = version.replace("a", "-alpha.").replace("b", "-beta.").replace("rc", "-rc.") %}
-{% set jupyterlab_version = ">=4.2.1,<4.3.0" %}
+
+# the if prevents bot duplicates
+{% if 1 %}{% set jupyterlab_version = ">=4.3.3,<4.4.0" %}{% endif %}
 
 package:
   name: jupyterlite-pyodide-kernel
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/j/jupyterlite-pyodide-kernel/jupyterlite_pyodide_kernel-{{ version }}.tar.gz
-  sha256: 0986b8cac4bfd05518342bd43f9d4acd0741a6e103c51523a2027bf98b357337
+  url: https://pypi.org/packages/source/j/jupyterlite-pyodide-kernel/jupyterlite_pyodide_kernel-{{ version }}.tar.gz
+  sha256: c60b0bbacf4de4b0d3ff960c7cdec1bc6c3ef094fefc53b7f5a2c4e50f27f2dd
 
 build:
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
+  noarch: python
+  script:
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
   entry_points:
     - jupyter-piplite = jupyterlite_pyodide_kernel.app:main
 
@@ -22,19 +28,20 @@ requirements:
     - hatchling >=1.4.0
     - jupyterlab {{ jupyterlab_version }}
     - pip
-    - python >=3.8
+    - python {{ python_min }}
   run:
-    - jupyterlite-core >=0.4.0a3,<0.5.0
+    - jupyterlite-core >=0.5.0b0,<0.6.0
     - pkginfo
-    - python >=3.8
+    - python >={{ python_min }}
 
 test:
   imports:
     - jupyterlite_pyodide_kernel
   requires:
     - jupyterlab {{ jupyterlab_version }}
-    - m2-grep  # [win]
     - pip
+    - python {{ python_min }}
+    - m2-grep  # [win]
   commands:
     - pip check
     - jupyter piplite --version
