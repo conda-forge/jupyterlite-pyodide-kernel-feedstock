@@ -1,0 +1,73 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
+schema_version: 1
+
+context:
+  version: 0.6.0b0
+  js_version: ${{ version | replace("a", "-alpha.") | replace("b", "-beta.") | replace("rc", "-rc.") }}
+  jupyterlab_version: ">=4.4.2,<4.5.0a0"
+  jupyterlite_core_version: ">=0.6.0b0,<0.7.0"
+
+package:
+  name: jupyterlite-pyodide-kernel
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/j/jupyterlite-pyodide-kernel/jupyterlite_pyodide_kernel-${{ version }}.tar.gz
+  sha256: e4d5bb3655553fdcb1e71f09b40133cdabf484736ef7eda9e453808fb46bb82b
+
+build:
+  number: 0
+  noarch: python
+  script:
+    - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
+  python:
+    entry_points:
+      - jupyter-piplite = jupyterlite_pyodide_kernel.app:main
+
+requirements:
+  host:
+    - hatchling >=1.4.0
+    - jupyterlab ${{ jupyterlab_version }}
+    - pip
+    - python ${{ python_min }}.*
+  run:
+    - jupyterlite-core ${{ jupyterlite_core_version }}
+    - pkginfo
+    - python >=${{ python_min }}
+
+tests:
+  - python:
+      imports: jupyterlite_pyodide_kernel
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - 3.13.*
+  - requirements:
+      run:
+        - jupyterlab ${{ jupyterlab_version }}
+        - python ${{ python_min }}.*
+        - if: win
+          then: m2-grep
+    script:
+      - jupyter piplite --version
+      - jupyter-piplite --help
+      - jupyter labextension list
+      - jupyter labextension list 1>labextensions 2>&1
+      - grep -iE "@jupyterlite/pyodide-kernel-extension.*v${{ js_version | replace('.', '\\.') }}.*OK" labextensions
+      - jupyter lite build
+      - grep -iE "pyodide-kernel-extension" _output/jupyter-lite.json
+
+about:
+  summary: Python kernel for JupyterLite powered by Pyodide
+  license: BSD-3-Clause
+  license_file:
+    - LICENSE
+    - jupyterlite_pyodide_kernel/labextension/static/third-party-licenses.json
+  homepage: https://github.com/jupyterlite/pyodide-kernel
+  documentation: https://jupyterlite-pyodide-kernel.rtfd.io
+
+extra:
+  recipe-maintainers:
+    - bollwyvl
+    - jtpio
+    - martinRenou
