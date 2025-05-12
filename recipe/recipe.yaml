@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: 0.6.0a6
+  version: 0.6.0b0
   js_version: ${{ version | replace("a", "-alpha.") | replace("b", "-beta.") | replace("rc", "-rc.") }}
   jupyterlab_version: ">=4.4.2,<4.5.0a0"
   jupyterlite_core_version: ">=0.6.0b0,<0.7.0"
@@ -29,7 +29,7 @@ requirements:
     - hatchling >=1.4.0
     - jupyterlab ${{ jupyterlab_version }}
     - pip
-    - python ${{ python_min }}
+    - python ${{ python_min }}.*
   run:
     - jupyterlite-core ${{ jupyterlite_core_version }}
     - pkginfo
@@ -45,7 +45,7 @@ tests:
   - requirements:
       run:
         - jupyterlab ${{ jupyterlab_version }}
-        - python ${{ python_min }}
+        - python ${{ python_min }}.*
         - if: win
           then: m2-grep
     script:
