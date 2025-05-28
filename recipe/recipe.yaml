@@ -13,7 +13,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/j/jupyterlite-pyodide-kernel/jupyterlite_pyodide_kernel-${{ version }}.tar.gz
-  sha256: 6bd4d49e4d1f0b480cb890e1c169362bccf9baea54e161ec5448263ddd31ec40
+  sha256: 44e1ee926e083277f06a51dd1ed580c9c98e931f88ca35539697f2a4acfca412
 
 build:
   number: 0
