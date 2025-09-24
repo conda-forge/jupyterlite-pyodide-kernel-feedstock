@@ -2,10 +2,10 @@
 schema_version: 1
 
 context:
-  version: "0.7.0a2"
+  version: "0.7.0a3"
   js_version: ${{ version | replace("a", "-alpha.") | replace("b", "-beta.") | replace("rc", "-rc.") }}
-  jupyterlab_version: ">=4.5.0a3,<4.6.0"
-  jupyterlite_core_version: ">=0.7.0a5,<0.8.0"
+  jupyterlab_version: ">=4.5.0a4,<4.6.0"
+  jupyterlite_core_version: ">=0.7.0a6,<0.8.0"
 
 package:
   name: jupyterlite-pyodide-kernel
@@ -13,7 +13,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/j/jupyterlite-pyodide-kernel/jupyterlite_pyodide_kernel-${{ version }}.tar.gz
-  sha256: ed30451e037c9977d62d157f7204b032d0422a146011a031d5755b09c4eed128
+  sha256: 0e546c7a57238be97840a4e162797eb4de89515382e432eae053a13539ed1b6c
 
 build:
   number: 0
