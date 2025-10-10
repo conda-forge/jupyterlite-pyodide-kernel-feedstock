@@ -1,7 +1,5 @@
-cdt_name:
-- conda
 channel_sources:
-- conda-forge/label/jupyterlab_alpha,conda-forge/label/jupyterlite_core_alpha,conda-forge
+- conda-forge/label/jupyterlab_alpha,conda-forge/label/jupyterlite_core_beta,conda-forge
 channel_targets:
 - conda-forge jupyterlite_pyodide_kernel_alpha
 docker_image:
