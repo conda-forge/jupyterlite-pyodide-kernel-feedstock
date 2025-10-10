@@ -1,5 +1,5 @@
 channel_sources:
-  - conda-forge/label/jupyterlab_alpha,conda-forge/label/jupyterlite_core_alpha,conda-forge
+  - conda-forge/label/jupyterlab_beta,conda-forge/label/jupyterlite_core_alpha,conda-forge
   # - conda-forge/label/jupyterlite_core_alpha,conda-forge
 channel_targets:
   - conda-forge jupyterlite_pyodide_kernel_alpha
