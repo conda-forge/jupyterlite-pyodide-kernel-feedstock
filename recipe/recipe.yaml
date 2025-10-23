@@ -2,10 +2,15 @@
 schema_version: 1
 
 context:
-  version: 0.6.0b1
+  version: "0.7.0b0"
+  jupyterlab_min: "4.5.0b0"
+  jupyterlab_max: "4.6.0"
+  jupyterlite_core_min: "0.7.0b0"
+  jupyterlite_core_max: "0.8.0"
+  python_check_max: "3.14"
+  # derived
   js_version: ${{ version | replace("a", "-alpha.") | replace("b", "-beta.") | replace("rc", "-rc.") }}
-  jupyterlab_version: ">=4.4.2,<4.5.0a0"
-  jupyterlite_core_version: ">=0.6.0b0,<0.7.0"
+
 
 package:
   name: jupyterlite-pyodide-kernel
@@ -13,7 +18,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/j/jupyterlite-pyodide-kernel/jupyterlite_pyodide_kernel-${{ version }}.tar.gz
-  sha256: 6bd4d49e4d1f0b480cb890e1c169362bccf9baea54e161ec5448263ddd31ec40
+  sha256: 81d19c7ae230898f8c478dee084b0fefcfeebed51a4f340a265b12a350a88edb
 
 build:
   number: 0
@@ -27,11 +32,11 @@ build:
 requirements:
   host:
     - hatchling >=1.4.0
-    - jupyterlab ${{ jupyterlab_version }}
+    - jupyterlab ${{ jupyterlab_min }}.*
     - pip
     - python ${{ python_min }}.*
   run:
-    - jupyterlite-core ${{ jupyterlite_core_version }}
+    - jupyterlite-core >=${{ jupyterlite_core_min }}
     - pkginfo
     - python >=${{ python_min }}
 
@@ -41,21 +46,19 @@ tests:
       pip_check: true
       python_version:
         - ${{ python_min }}.*
-        - 3.13.*
+        - ${{ python_check_max }}.*
   - requirements:
       run:
-        - jupyterlab ${{ jupyterlab_version }}
+        - jupyterlab ${{ jupyterlab_min }}.*
+        - jupyterlite-core ${{ jupyterlite_core_min }}.*
         - python ${{ python_min }}.*
-        - if: win
-          then: m2-grep
     script:
       - jupyter piplite --version
       - jupyter-piplite --help
       - jupyter labextension list
-      - jupyter labextension list 1>labextensions 2>&1
-      - grep -iE "@jupyterlite/pyodide-kernel-extension.*v${{ js_version | replace('.', '\\.') }}.*OK" labextensions
+      - jupyter labextension list 2>&1 | python -c "import re, sys; assert re.search(r'@jupyterlite/pyodide-kernel-extension.*v${{ js_version | replace(".", "\\.") }}.*OK', sys.stdin.read())"
       - jupyter lite build
-      - grep -iE "pyodide-kernel-extension" _output/jupyter-lite.json
+      - python -c "from pathlib import Path; assert b'pyodide-kernel-extension' in Path('_output/jupyter-lite.json').read_bytes()"
 
 about:
   summary: Python kernel for JupyterLite powered by Pyodide
@@ -68,6 +71,7 @@ about:
 
 extra:
   recipe-maintainers:
+    - agriyakhetarpal
     - bollwyvl
     - jtpio
     - martinRenou
