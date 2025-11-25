@@ -2,10 +2,10 @@
 schema_version: 1
 
 context:
-  version: "0.7.0rc0"
+  version: "0.7.0rc1"
   jupyterlab_min: "4.5.0"
   jupyterlab_max: "4.6.0"
-  jupyterlite_core_min: "0.7.0rc0"
+  jupyterlite_core_min: "0.7.0rc2"
   jupyterlite_core_max: "0.8.0"
   python_check_max: "3.14"
   # derived
@@ -18,7 +18,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/j/jupyterlite-pyodide-kernel/jupyterlite_pyodide_kernel-${{ version }}.tar.gz
-  sha256: 87efe6d5652c19b4edd938740e2bf9b771de8d82e2dde92eb4d5fe3afa5038f8
+  sha256: 17daaa41336d43f1687397f5e5464b40489f4816952099fc9f86ab977a8a24cb
 
 build:
   number: 0
