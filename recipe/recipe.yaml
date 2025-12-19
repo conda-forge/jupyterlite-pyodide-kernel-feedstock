@@ -2,14 +2,14 @@
 schema_version: 1
 
 context:
-  version: "0.7.0a5"
-  jupyterlab_min: "4.5.0b0"
-  jupyterlab_max: "4.6.0"
-  jupyterlite_core_min: "0.7.0a7"
-  jupyterlite_core_max: "0.8.0"
+  version: "0.8.0a0"
+  jupyterlab_min: "4.6.0a0"
+  jupyterlab_max: "4.7.0"
+  jupyterlite_core_min: "0.8.0a0"
+  jupyterlite_core_max: "0.9.0"
+  python_check_max: "3.14"
   # derived
   js_version: ${{ version | replace("a", "-alpha.") | replace("b", "-beta.") | replace("rc", "-rc.") }}
-
 
 package:
   name: jupyterlite-pyodide-kernel
@@ -17,7 +17,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/j/jupyterlite-pyodide-kernel/jupyterlite_pyodide_kernel-${{ version }}.tar.gz
-  sha256: d0c0ec4afbbb677ce3ee2fcdfe40d2b55f1efb9cce4e8020e3432990c3d00c93
+  sha256: a7b2fe4256664ae59d47b21b8f33800ff3e3040172da6316fb6f05c7f56025f0
 
 build:
   number: 0
@@ -45,7 +45,7 @@ tests:
       pip_check: true
       python_version:
         - ${{ python_min }}.*
-        - 3.13.*
+        - ${{ python_check_max }}.*
   - requirements:
       run:
         - jupyterlab ${{ jupyterlab_min }}.*
