@@ -3,11 +3,13 @@ About jupyterlite-pyodide-kernel-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/jupyterlite-pyodide-kernel-feedstock/blob/main/LICENSE.txt)
 
-Home: https://github.com/jupyterlite/pyodide-kernel
+Home: https://pypi.org/project/jupyterlite-pyodide-kernel
 
 Package license: BSD-3-Clause
 
 Summary: Python kernel for JupyterLite powered by Pyodide
+
+Development: https://github.com/jupyterlite/pyodide-kernel
 
 Documentation: https://jupyterlite-pyodide-kernel.rtfd.io/
 
