@@ -27,7 +27,6 @@ outputs:
   - package:
       name: jupyterlite-pyodide-kernel
     build:
-      number: 0
       noarch: python
       script:
         - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
@@ -63,6 +62,35 @@ outputs:
           - jupyter labextension list 2>&1 | python -c "import re, sys; assert re.search(r'@jupyterlite/pyodide-kernel-extension.*v${{ js_version | replace(".", "\\.") }}.*OK', sys.stdin.read())"
           - jupyter lite build
           - python -c "from pathlib import Path; assert b'pyodide-kernel-extension' in Path('_output/jupyter-lite.json').read_bytes()"
+
+  - package:
+      name: jupyterlite-pyodide-kernel-with-lock
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - ${{ pin_subpackage("jupyterlite-pyodide-kernel", exact=True) }}
+        - pyodide-lock-with-uv >=0.1.2,<0.2.0
+    tests:
+      - python:
+          imports: jupyterlite_pyodide_kernel
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
+      - files:
+          source:
+            - pyproject.toml
+        requirements:
+          run:
+            - pytest-console-scripts
+            - pytest-cov <7
+            - pytest-html
+            - python ${{ python_min }}.*
+        script:
+          - pytest -k "not test_validate_config" --cov-fail-under=93
+    about:
+      summary: Python kernel for JupyterLite powered by Pyodide (with [lock])
 
 about:
   summary: Python kernel for JupyterLite powered by Pyodide
