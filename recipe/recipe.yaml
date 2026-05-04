@@ -3,9 +3,9 @@ schema_version: 1
 
 context:
   version: "0.7.2"
-  jupyterlab_min: "4.5.5"
+  jupyterlab_min: "4.5.7"
   jupyterlab_max: "4.6.0"
-  jupyterlite_core_min: "0.7.3"
+  jupyterlite_core_min: "0.7.5"
   jupyterlite_core_max: "0.8.0"
   python_check_max: "3.14"
   # derived
