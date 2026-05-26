@@ -87,7 +87,7 @@ outputs:
             - pytest-console-scripts
             - pytest-cov <7
             - pytest-html
-            - python ${{ python_min }}.*
+            - python ${{ python_min_lock }}.*
         script:
           - pytest -k "not test_validate_config" --cov-fail-under=93
     about:
