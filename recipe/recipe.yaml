@@ -2,63 +2,96 @@
 schema_version: 1
 
 context:
-  version: "0.7.2"
-  jupyterlab_min: "4.5.7"
-  jupyterlab_max: "4.6.0"
-  jupyterlite_core_min: "0.7.5"
-  jupyterlite_core_max: "0.8.0"
+  version: "0.8.0"
+  jupyterlab_min: "4.6.0"
+  jupyterlab_max: "4.7.0"
+  jupyterlite_core_min: "0.8.0"
+  jupyterlite_core_max: "0.9.0"
+  python_min_lock: "3.12"
   python_check_max: "3.14"
   # derived
   js_version: ${{ version | replace("a", "-alpha.") | replace("b", "-beta.") | replace("rc", "-rc.") }}
 
-
-package:
-  name: jupyterlite-pyodide-kernel
+recipe:
+  name: jupyterlite-pyodide-kernel-split
   version: ${{ version }}
 
 source:
   url: https://pypi.org/packages/source/j/jupyterlite-pyodide-kernel/jupyterlite_pyodide_kernel-${{ version }}.tar.gz
-  sha256: 4a3466c5e18adc9ac4db7a8386fc63da2fc9e6b6df8a23cb65a81e8343f1baae
+  sha256: 515c3036fb985a46876f340922d28e3ecb74e547fa8b8c4f2b36c4f07420e50c
 
 build:
   number: 0
   noarch: python
-  script:
-    - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
-  python:
-    entry_points:
-      - jupyter-piplite = jupyterlite_pyodide_kernel.app:main
 
-requirements:
-  host:
-    - hatchling >=1.28.0
-    - jupyterlab ${{ jupyterlab_min }}.*
-    - pip
-    - python ${{ python_min }}.*
-  run:
-    - jupyterlite-core >=${{ jupyterlite_core_min }}
-    - pkginfo
-    - python >=${{ python_min }}
-
-tests:
-  - python:
-      imports: jupyterlite_pyodide_kernel
-      pip_check: true
-      python_version:
-        - ${{ python_min }}.*
-        - ${{ python_check_max }}.*
-  - requirements:
-      run:
+outputs:
+  - package:
+      name: jupyterlite-pyodide-kernel
+    build:
+      noarch: python
+      script:
+        - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
+      python:
+        entry_points:
+          - jupyter-piplite = jupyterlite_pyodide_kernel.app:main
+    requirements:
+      host:
+        - hatchling >=1.4.0
         - jupyterlab ${{ jupyterlab_min }}.*
-        - jupyterlite-core ${{ jupyterlite_core_min }}.*
+        - pip
         - python ${{ python_min }}.*
-    script:
-      - jupyter piplite --version
-      - jupyter-piplite --help
-      - jupyter labextension list
-      - jupyter labextension list 2>&1 | python -c "import re, sys; assert re.search(r'@jupyterlite/pyodide-kernel-extension.*v${{ js_version | replace(".", "\\.") }}.*OK', sys.stdin.read())"
-      - jupyter lite build
-      - python -c "from pathlib import Path; assert b'pyodide-kernel-extension' in Path('_output/jupyter-lite.json').read_bytes()"
+      run:
+        - jupyterlite-core >=${{ jupyterlite_core_min }}
+        - pkginfo
+        - python >=${{ python_min }}
+    tests:
+      - python:
+          imports: jupyterlite_pyodide_kernel
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
+      - requirements:
+          run:
+            - jupyterlab ${{ jupyterlab_min }}.*
+            - jupyterlite-core ${{ jupyterlite_core_min }}.*
+            - python ${{ python_min }}.*
+        script:
+          - jupyter piplite --version
+          - jupyter-piplite --help
+          - jupyter labextension list
+          - jupyter labextension list 2>&1 | python -c "import re, sys; assert re.search(r'@jupyterlite/pyodide-kernel-extension.*v${{ js_version | replace(".", "\\.") }}.*OK', sys.stdin.read())"
+          - jupyter lite build
+          - python -c "from pathlib import Path; assert b'pyodide-kernel-extension' in Path('_output/jupyter-lite.json').read_bytes()"
+
+  - package:
+      name: jupyterlite-pyodide-kernel-with-lock
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - ${{ pin_subpackage("jupyterlite-pyodide-kernel", exact=True) }}
+        - pyodide-lock-with-uv >=0.1.3,<0.2.0
+    tests:
+      - python:
+          imports: jupyterlite_pyodide_kernel
+          pip_check: true
+          python_version:
+            - ${{ python_min_lock }}.*
+            - ${{ python_check_max }}.*
+      - files:
+          source:
+            - pyproject.toml
+        requirements:
+          run:
+            - pytest-console-scripts
+            - pytest-cov <7
+            - pytest-html
+            - python ${{ python_min_lock }}.*
+        script:
+          - pytest -k "not test_validate_config" --cov-fail-under=93
+    about:
+      summary: Python kernel for JupyterLite powered by Pyodide (with [lock])
 
 about:
   summary: Python kernel for JupyterLite powered by Pyodide
@@ -66,11 +99,11 @@ about:
   license_file:
     - LICENSE
     - jupyterlite_pyodide_kernel/labextension/static/third-party-licenses.json
-  homepage: https://pypi.org/project/jupyterlite-pyodide-kernel
-  repository: https://github.com/jupyterlite/pyodide-kernel
+  homepage: https://github.com/jupyterlite/pyodide-kernel
   documentation: https://jupyterlite-pyodide-kernel.rtfd.io
 
 extra:
+  feedstock-name: jupyterlite-pyodide-kernel
   recipe-maintainers:
     - agriyakhetarpal
     - bollwyvl

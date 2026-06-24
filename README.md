@@ -3,13 +3,26 @@ About jupyterlite-pyodide-kernel-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/jupyterlite-pyodide-kernel-feedstock/blob/main/LICENSE.txt)
 
-Home: https://pypi.org/project/jupyterlite-pyodide-kernel
+
+About jupyterlite-pyodide-kernel
+--------------------------------
+
+Home: https://github.com/jupyterlite/pyodide-kernel
 
 Package license: BSD-3-Clause
 
 Summary: Python kernel for JupyterLite powered by Pyodide
 
-Development: https://github.com/jupyterlite/pyodide-kernel
+Documentation: https://jupyterlite-pyodide-kernel.rtfd.io/
+
+About jupyterlite-pyodide-kernel-with-lock
+------------------------------------------
+
+Home: https://github.com/jupyterlite/pyodide-kernel
+
+Package license: BSD-3-Clause
+
+Summary: Python kernel for JupyterLite powered by Pyodide (with [lock])
 
 Documentation: https://jupyterlite-pyodide-kernel.rtfd.io/
 
@@ -20,7 +33,9 @@ Current build status
 <table><tr>
     <td>All platforms:</td>
     <td>
-      <img src="https://img.shields.io/badge/noarch-disabled-lightgrey.svg" alt="noarch disabled">
+      <a href="https://github.com/conda-forge/jupyterlite-pyodide-kernel-feedstock/actions/workflows/conda-build.yml">
+        <img src="https://github.com/conda-forge/jupyterlite-pyodide-kernel-feedstock/actions/workflows/conda-build.yml/badge.svg?event=push&branch=main">
+      </a>
     </td>
   </tr>
 </table>
@@ -31,6 +46,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-jupyterlite--pyodide--kernel-green.svg)](https://anaconda.org/conda-forge/jupyterlite-pyodide-kernel) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/jupyterlite-pyodide-kernel.svg)](https://anaconda.org/conda-forge/jupyterlite-pyodide-kernel) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/jupyterlite-pyodide-kernel.svg)](https://anaconda.org/conda-forge/jupyterlite-pyodide-kernel) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/jupyterlite-pyodide-kernel.svg)](https://anaconda.org/conda-forge/jupyterlite-pyodide-kernel) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-jupyterlite--pyodide--kernel--with--lock-green.svg)](https://anaconda.org/conda-forge/jupyterlite-pyodide-kernel-with-lock) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/jupyterlite-pyodide-kernel-with-lock.svg)](https://anaconda.org/conda-forge/jupyterlite-pyodide-kernel-with-lock) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/jupyterlite-pyodide-kernel-with-lock.svg)](https://anaconda.org/conda-forge/jupyterlite-pyodide-kernel-with-lock) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/jupyterlite-pyodide-kernel-with-lock.svg)](https://anaconda.org/conda-forge/jupyterlite-pyodide-kernel-with-lock) |
 
 Installing jupyterlite-pyodide-kernel
 =====================================
@@ -42,16 +58,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `jupyterlite-pyodide-kernel` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `jupyterlite-pyodide-kernel, jupyterlite-pyodide-kernel-with-lock` can be installed with `conda`:
 
 ```
-conda install jupyterlite-pyodide-kernel
+conda install jupyterlite-pyodide-kernel jupyterlite-pyodide-kernel-with-lock
 ```
 
 or with `mamba`:
 
 ```
-mamba install jupyterlite-pyodide-kernel
+mamba install jupyterlite-pyodide-kernel jupyterlite-pyodide-kernel-with-lock
 ```
 
 It is possible to list all of the versions of `jupyterlite-pyodide-kernel` available on your platform with `conda`:
