@@ -1,5 +1,5 @@
 channel_sources:
-- conda-forge/label/jupyterlite_core_rc,conda-forge
+- conda-forge
 channel_targets:
 - conda-forge jupyterlite_pyodide_kernel_rc
 docker_image:
