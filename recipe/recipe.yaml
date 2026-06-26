@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "0.8.0"
+  version: "0.8.1"
   jupyterlab_min: "4.6.0"
   jupyterlab_max: "4.7.0"
   jupyterlite_core_min: "0.8.0"
@@ -18,7 +18,7 @@ recipe:
 
 source:
   url: https://pypi.org/packages/source/j/jupyterlite-pyodide-kernel/jupyterlite_pyodide_kernel-${{ version }}.tar.gz
-  sha256: 515c3036fb985a46876f340922d28e3ecb74e547fa8b8c4f2b36c4f07420e50c
+  sha256: 58c8c6f3f660f8fcb404afe8efc822145a96abffcbd10e6523978b0b3d95346a
 
 build:
   number: 0
