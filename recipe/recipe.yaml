@@ -2,11 +2,13 @@
 schema_version: 1
 
 context:
-  version: "0.8.0a2"
-  jupyterlab_min: "4.6.0a2"
-  jupyterlab_max: "4.7.0"
-  jupyterlite_core_min: "0.8.0a1"
-  jupyterlite_core_max: "0.9.0"
+  version: "0.9.0a0"
+  jupyter_builder_min: 1.1.0
+  jupyterlab_min: "4.7.0a0"
+  jupyterlab_max: "4.8.0"
+  jupyterlite_core_min: "0.9.0a0"
+  jupyterlite_core_max: "0.10.0"
+  python_min_lock: "3.12"
   python_check_max: "3.14"
   # derived
   js_version: ${{ version | replace("a", "-alpha.") | replace("b", "-beta.") | replace("rc", "-rc.") }}
@@ -17,7 +19,7 @@ recipe:
 
 source:
   url: https://pypi.org/packages/source/j/jupyterlite-pyodide-kernel/jupyterlite_pyodide_kernel-${{ version }}.tar.gz
-  sha256: 8b12851a129d65c9ce7f8c70510ef2bfcdaeae22242109ba455536cd735bf6e3
+  sha256: 73027a1a1bc74c373bf255cf758444c67074e78d072d4ca4398b7d1f9e02cd89
 
 build:
   number: 0
@@ -36,7 +38,7 @@ outputs:
     requirements:
       host:
         - hatchling >=1.4.0
-        - jupyterlab ${{ jupyterlab_min }}.*
+        - jupyter-builder ${{ jupyter_builder_min }}.*
         - pip
         - python ${{ python_min }}.*
       run:
@@ -70,13 +72,13 @@ outputs:
     requirements:
       run:
         - ${{ pin_subpackage("jupyterlite-pyodide-kernel", exact=True) }}
-        - pyodide-lock-with-uv >=0.1.2,<0.2.0
+        - pyodide-lock-with-uv >=0.1.3,<0.2.0
     tests:
       - python:
           imports: jupyterlite_pyodide_kernel
           pip_check: true
           python_version:
-            - ${{ python_min }}.*
+            - ${{ python_min_lock }}.*
             - ${{ python_check_max }}.*
       - files:
           source:
@@ -86,7 +88,7 @@ outputs:
             - pytest-console-scripts
             - pytest-cov <7
             - pytest-html
-            - python ${{ python_min }}.*
+            - python ${{ python_min_lock }}.*
         script:
           - pytest -k "not test_validate_config" --cov-fail-under=93
     about:
