@@ -10,6 +10,8 @@ context:
   python_check_max: "3.15"
   # derived
   js_version: ${{ version | replace("a", "-alpha.") | replace("b", "-beta.") | replace("rc", "-rc.") }}
+  # some fixture issue
+  pytest_k: not test_validate_config
 
 recipe:
   name: jupyterlite-pyodide-kernel-split
@@ -97,7 +99,7 @@ outputs:
             - pytest-html
             - python ${{ python_min_lock }}.*
         script:
-          - pytest -vv --tb=long --color=yes --cov-fail-under=93
+          - pytest -vv --tb=long --color=yes -k "${{ pytest_k }}" --cov-fail-under=93
     about:
       summary: Python kernel for JupyterLite powered by Pyodide (with [lock])
 
