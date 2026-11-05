@@ -4,10 +4,10 @@ schema_version: 1
 context:
   version: "0.8.6"
   jupyterlab_min: "4.6.3"
-  jupyterlite_core_min: "0.8.3"
+  jupyterlite_core_min: "0.8.7"
   jupyterlite_core_max: "0.9.0"
   python_min_lock: "3.12"
-  python_check_max: "3.14"
+  python_check_max: "3.15"
   # derived
   js_version: ${{ version | replace("a", "-alpha.") | replace("b", "-beta.") | replace("rc", "-rc.") }}
 
@@ -36,7 +36,7 @@ outputs:
     requirements:
       host:
         - hatchling >=1.28.0
-        - jupyter-builder >=1.2.2
+        - jupyter-builder >=1.2.2,<2
         - pip
         - python ${{ python_min }}.*
       run:
@@ -88,7 +88,7 @@ outputs:
             - pytest-html
             - python ${{ python_min_lock }}.*
         script:
-          - pytest -k "not test_validate_config" --cov-fail-under=93
+          - pytest -vv --tb=long --color=yes --cov-fail-under=93
     about:
       summary: Python kernel for JupyterLite powered by Pyodide (with [lock])
 
