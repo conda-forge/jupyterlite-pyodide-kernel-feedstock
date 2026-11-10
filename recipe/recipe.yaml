@@ -39,7 +39,7 @@ outputs:
     requirements:
       host:
         - hatchling >=1.28.0
-        - jupyter-builder 1.2.2,<2
+        - jupyter-builder >=1.2.2,<2
         - pip
         - python ${{ python_min }}.*
       run:

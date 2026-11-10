@@ -33,7 +33,9 @@ Current build status
 <table><tr>
     <td>All platforms:</td>
     <td>
-      <img src="https://img.shields.io/badge/noarch-disabled-lightgrey.svg" alt="noarch disabled">
+      <a href="https://github.com/conda-forge/jupyterlite-pyodide-kernel-feedstock/actions/workflows/conda-build.yml">
+        <img src="https://github.com/conda-forge/jupyterlite-pyodide-kernel-feedstock/actions/workflows/conda-build.yml/badge.svg?event=push&branch=main">
+      </a>
     </td>
   </tr>
 </table>
@@ -56,31 +58,73 @@ conda config --add channels conda-forge/label/jupyterlite_pyodide_kernel_beta
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge/label/jupyterlite_pyodide_kernel_beta` channel has been enabled, `jupyterlite-pyodide-kernel, jupyterlite-pyodide-kernel-with-lock` can be installed with `conda`:
+How to use
+----------
+
+<details>
+<summary>With conda</summary>
 
 ```
 conda install jupyterlite-pyodide-kernel jupyterlite-pyodide-kernel-with-lock
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
 mamba install jupyterlite-pyodide-kernel jupyterlite-pyodide-kernel-with-lock
 ```
 
-It is possible to list all of the versions of `jupyterlite-pyodide-kernel` available on your platform with `conda`:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+# for adding to your local project
+pixi add jupyterlite-pyodide-kernel jupyterlite-pyodide-kernel-with-lock
+# for installing globally
+pixi global install jupyterlite-pyodide-kernel jupyterlite-pyodide-kernel-with-lock
+```
+
+</details>
+
+Search package versions
+-----------------------
+
+It is possible to list all of the versions of `jupyterlite-pyodide-kernel` available on your platform:
+
+<details>
+<summary>With conda</summary>
 
 ```
 conda search jupyterlite-pyodide-kernel --channel conda-forge/label/jupyterlite_pyodide_kernel_beta
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
 mamba search jupyterlite-pyodide-kernel --channel conda-forge/label/jupyterlite_pyodide_kernel_beta
 ```
 
-Alternatively, `mamba repoquery` may provide more information:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+pixi search jupyterlite-pyodide-kernel --channel conda-forge/label/jupyterlite_pyodide_kernel_beta
+```
+
+</details>
+
+<details>
+<summary>With mamba repoquery, which may provide more information</summary>
 
 ```
 # Search all versions available on your platform:
@@ -92,6 +136,9 @@ mamba repoquery whoneeds jupyterlite-pyodide-kernel --channel conda-forge/label/
 # List dependencies of `jupyterlite-pyodide-kernel`:
 mamba repoquery depends jupyterlite-pyodide-kernel --channel conda-forge/label/jupyterlite_pyodide_kernel_beta
 ```
+
+</details>
+
 
 
 About conda-forge
@@ -108,9 +155,7 @@ for each of the installable packages. Such a repository is known as a *feedstock
 A feedstock is made up of a conda recipe (the instructions on what and how to build
 the package) and the necessary configurations for automatic building using freely
 available continuous integration services. Thanks to the awesome service provided by
-[Azure](https://azure.microsoft.com/en-us/services/devops/), [GitHub](https://github.com/),
-[CircleCI](https://circleci.com/), [AppVeyor](https://www.appveyor.com/),
-[Drone](https://cloud.drone.io/welcome), and [TravisCI](https://travis-ci.com/)
+[Azure](https://azure.microsoft.com/en-us/services/devops/) and [GitHub](https://github.com/)
 it is possible to build and upload installable packages to the
 [conda-forge](https://anaconda.org/conda-forge) [anaconda.org](https://anaconda.org/)
 channel for Linux, Windows and OSX respectively.
